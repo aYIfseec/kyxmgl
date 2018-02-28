@@ -1,0 +1,11 @@
+1.导出文件时，按钮不要用ajax去请求。直接用链接。
+
+2.文件导出时，设置文件名为中文时，中文名不显示，只显示后缀名，如:表格.xls,下载后只有xls
+response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+解决办法：对中文文件名字符串从新编码
+fileName = new String(fileName.getBytes(), "ISO-8859-1");
+
+3.response.reset()的作用
+jsp编译后页面代码出现空白行，就是由于未清空请求头中的空白行。
+下载后的文件内的空白行也是这样产生的。
+因此，需要 response.reset() 来清除首部的空白行。
